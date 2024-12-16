@@ -1,0 +1,79 @@
+version: "3.3"
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - ./json:/app/json:ro
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/postgres
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# version: "3.3"
+# services:
+#   app:
+#     build:
+#       context: .
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       - db
+#     env_file:
+#       - .env
+#     volumes:
+#       - .:/app
+#       - ./json:/app/json:ro
+#   db:
+#     image: postgres:15
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+
+
+
+# volumes:
+#   db_data:
+
+
